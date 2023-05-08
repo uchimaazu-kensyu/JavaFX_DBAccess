@@ -1,33 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import java.lang.Integer?>
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
 <VBox alignment="CENTER" prefHeight="462.0" prefWidth="670.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxtest2.StoneGame">
     <padding>
         <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
     </padding>
-   <Label text="Label" />
-   <TextField fx:id="addName" />
-   <TextField fx:id="addScore" />
 
 
-       <ComboBox fx:id="addCompany" promptText="選んでください">
-       <items>
-           <FXCollections fx:factory="observableArrayList">
-               <String fx:value ="RNS"></String>
-               <String fx:value ="OSE"></String>
-               <String fx:value ="TC"></String>
-           </FXCollections>
-       </items>
-       </ComboBox>
+    <HBox prefHeight="300.0" prefWidth="400.0">
+
+    <VBox prefHeight="300.0" prefWidth="200.0" >
+
+   <Label text="ユーザー追加" />
 
 
-   <Button mnemonicParsing="false" onAction="#clickAddButton" text="追加" />
+
+        <ComboBox fx:id="addCompany" promptText="所属を選んでください" >
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="RNS" />
+                    <String fx:value="OSE" />
+                    <String fx:value="TC" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+    <HBox prefHeight="40.0" prefWidth="300.0" >
+        <Label text="名前" />
+        <TextField fx:id="addName" />
+    </HBox>
+
+    <HBox prefHeight="40.0" prefWidth="200.0" >
+        <Label text="点数" />
+        <TextField fx:id="addScore" />
+    </HBox>
+
+
+
+
+        <Button mnemonicParsing="false" onAction="#clickAddButton" text="追加" />
+
+    </VBox>
+
+
+
+
+
+        <VBox prefHeight="300.0" prefWidth="200.0" >
+
+            <Label text="ユーザー管理" />
+
+
+
+            <ComboBox fx:id="editCompany" promptText="所属を選んでください" >
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="RNS" />
+                        <String fx:value="OSE" />
+                        <String fx:value="TC" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
+            <HBox prefHeight="40.0" prefWidth="300.0" >
+                <Label text="名前" />
+                <TextField fx:id="editName" />
+            </HBox>
+
+            <HBox prefHeight="40.0" prefWidth="200.0" >
+                <Label text="点数" />
+                <TextField fx:id="editScore" />
+            </HBox>
+
+
+
+            <HBox prefHeight="40.0" prefWidth="200.0" >
+
+            <Button mnemonicParsing="false" onAction="#clickAddButton" text="削除" />
+            <Button mnemonicParsing="false" onAction="#clickAddButton" text="編集" />
+
+            </HBox>
+
+        </VBox>
+
+
+    </HBox>
+
+
+
+
+
+
+
+
+
+
+
    <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0">
        <columns>
            <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />
