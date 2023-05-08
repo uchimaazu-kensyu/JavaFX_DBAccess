@@ -11,6 +11,7 @@ import javafx.collections.*;
 import javafx.scene.control.cell.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
+import javafx.scene.control.TableView;
 
 
 import java.net.URL;
@@ -35,6 +36,26 @@ public class StoneGame implements Initializable {
 
     @FXML private TextField addName;
     @FXML private TextField addScore;
+
+    @FXML private TextField editName;
+    @FXML private TextField editScore;
+
+
+
+
+
+    public void clickEditButton(ActionEvent actionEvent){
+        User selectedObject = (User)table.getSelectionModel().getSelectedItem();
+        if(selectedObject != null){
+
+            String affiliation = selectedObject.getAffiliation();
+            String name = selectedObject.getName();
+            String score  = String.valueOf(selectedObject.getScore());
+            editName.setText(name);
+            editScore.setText(score);
+
+        }
+    }
 
 
 
@@ -66,4 +87,8 @@ public class StoneGame implements Initializable {
         int score = Integer.parseInt(addScore.getText());
         data.addAll(new User(company,name,score));
     }
+
+
+
+
 }

@@ -82,7 +82,7 @@
             <HBox prefHeight="40.0" prefWidth="200.0" >
 
             <Button mnemonicParsing="false" onAction="#clickAddButton" text="削除" />
-            <Button mnemonicParsing="false" onAction="#clickAddButton" text="編集" />
+            <Button mnemonicParsing="false" onAction="#clickEditButton" text="編集" />
 
             </HBox>
 
