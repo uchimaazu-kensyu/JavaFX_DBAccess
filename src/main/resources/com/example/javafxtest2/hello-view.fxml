@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefHeight="462.0" prefWidth="670.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxtest2.StoneGame">
+    <padding>
+        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+    </padding>
+   <Label text="Label" />
+   <TextField fx:id="addName" />
+   <TextField fx:id="addScore" />
+   <Button mnemonicParsing="false" text="追加" onAction="#clickAddButton" />
+   <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0">
+       <columns>
+           <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />
+           <TableColumn fx:id="affiliationCol" prefWidth="162.0" text="所属" />
+           <TableColumn fx:id="nameCol" prefWidth="131.0" text="名前" />
+           <TableColumn fx:id="scoreCol" prefWidth="96.0" text="スコア" />
+       </columns>
+   </TableView>
+   <Button fx:id="button" mnemonicParsing="false" onAction="#addButton" text="Button" />
+    
+
+</VBox>
