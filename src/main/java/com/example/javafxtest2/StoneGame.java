@@ -29,6 +29,8 @@ public class StoneGame implements Initializable {
     @FXML private TableColumn nameCol;
     @FXML private TableColumn scoreCol;
     private ObservableList<User> data;
+    @FXML
+    private ComboBox<String> addCompany;
 
 
     @FXML private TextField addName;
@@ -59,8 +61,9 @@ public class StoneGame implements Initializable {
     }
 
     public void clickAddButton(ActionEvent actionEvent) {
+        String company = addCompany.getValue();
         String name = addName.getText();
         int score = Integer.parseInt(addScore.getText());
-        data.addAll(new User("RNS",name,score));
+        data.addAll(new User(company,name,score));
     }
 }
