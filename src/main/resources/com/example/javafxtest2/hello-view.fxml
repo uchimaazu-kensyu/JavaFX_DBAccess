@@ -81,7 +81,7 @@
 
             <HBox prefHeight="40.0" prefWidth="200.0" >
 
-            <Button mnemonicParsing="false" onAction="#clickAddButton" text="削除" />
+            <Button mnemonicParsing="false" onAction="#clickDeleteButton" text="削除" />
             <Button mnemonicParsing="false" onAction="#clickEditButton" text="編集" />
 
             </HBox>
@@ -101,7 +101,7 @@
 
 
 
-   <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0">
+   <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0" >
        <columns>
            <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />
            <TableColumn fx:id="affiliationCol" prefWidth="162.0" text="所属" />

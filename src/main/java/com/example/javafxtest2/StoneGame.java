@@ -32,6 +32,8 @@ public class StoneGame implements Initializable {
     private ObservableList<User> data;
     @FXML
     private ComboBox<String> addCompany;
+    @FXML
+    private ComboBox<String> editCompany;
 
 
     @FXML private TextField addName;
@@ -57,6 +59,15 @@ public class StoneGame implements Initializable {
         }
     }
 
+    public void clickDeleteButton(ActionEvent actionEvent){
+        User selectedObject = (User)table.getSelectionModel().getSelectedItem();
+        if(selectedObject != null){
+
+            table.getItems().remove(selectedObject);
+
+        }
+    }
+
 
 
 
@@ -73,6 +84,18 @@ public class StoneGame implements Initializable {
         data.addAll(new User("RNS","Uchima",30));
         data.addAll(new User("RNS","Matsumoto",50));
 
+        table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                User nowSelection = (User)newSelection;
+                String affiliation = nowSelection.getAffiliation();
+                String name = nowSelection.getName();
+                String score = String.valueOf(nowSelection.getScore());
+                editName.setText(name);
+                editScore.setText(score);
+                editCompany.getSelectionModel().select(affiliation);
+            }
+        });
+
     }
 
 
@@ -87,6 +110,8 @@ public class StoneGame implements Initializable {
         int score = Integer.parseInt(addScore.getText());
         data.addAll(new User(company,name,score));
     }
+
+
 
 
 

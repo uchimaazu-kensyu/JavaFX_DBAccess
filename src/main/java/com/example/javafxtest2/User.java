@@ -4,7 +4,6 @@ public class User{
     //id用
     private static int idCounter = 1;
 
-
     private int id;
     private String affiliation;
     private String name;
