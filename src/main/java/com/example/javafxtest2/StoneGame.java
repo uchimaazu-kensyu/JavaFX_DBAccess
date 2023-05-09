@@ -1,18 +1,11 @@
 package com.example.javafxtest2;
 
-import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.collections.*;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.scene.layout.*;
 import javafx.scene.control.*;
-import javafx.collections.*;
 import javafx.scene.control.cell.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.control.TableView;
-
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -41,6 +34,9 @@ public class StoneGame implements Initializable {
 
     @FXML private TextField editName;
     @FXML private TextField editScore;
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+
 
 
 
@@ -52,16 +48,60 @@ public class StoneGame implements Initializable {
             //今入力されている値を取得
             String company = editCompany.getValue();
             String name = editName.getText();
-            int score = Integer.parseInt(editScore.getText());
+            String score = editScore.getText();
 
-            selectedObject.setAffiliation(company);
-            selectedObject.setName(name);
-            selectedObject.setScore(score);
+            boolean ok = checkInput(company,name,score);
+            if(ok){
+                int setScore = Integer.parseInt(editScore.getText());
+                selectedObject.setAffiliation(company);
+                selectedObject.setName(name);
+                selectedObject.setScore(setScore);
 
-            table.refresh();
+                table.refresh();
+            }
+
+
+
+
+
 
 
         }
+    }
+
+    public boolean checkInput (String company , String name, String score){
+        if(company!=null && !name.equals("") && !score.equals("") ){
+            try{
+                int setScore = Integer.parseInt(addScore.getText());
+
+            }catch (NumberFormatException e){
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("点数を数字で入力してください");
+                alert.showAndWait();
+                return false;
+            }
+
+            int setScore = Integer.parseInt(addScore.getText());
+            if (0 <= setScore  && setScore <100){
+                return true;
+            }else {
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("0~100までの点数を入力できます。");
+                alert.showAndWait();
+                return false;
+            }
+
+        }else{
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("所属企業、名前、点数のいずれかが入力されていません。");
+            alert.showAndWait();
+            return false;
+        }
+
+
     }
 
     public void clickDeleteButton(ActionEvent actionEvent){
@@ -104,15 +144,18 @@ public class StoneGame implements Initializable {
     }
 
     public void clickAddButton(ActionEvent actionEvent) {
+
+
         String company = addCompany.getValue();
         String name = addName.getText();
-        int score = Integer.parseInt(addScore.getText());
-        data.addAll(new User(company,name,score));
+        String score = addScore.getText();
+        boolean ok = checkInput(company,name,score);
+        if(ok){
+            data.addAll(new User(company,name,Integer.parseInt(score)));
+        }
+
+
     }
-
-
-
-
 
 
 }
