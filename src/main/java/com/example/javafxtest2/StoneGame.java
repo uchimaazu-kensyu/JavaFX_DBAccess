@@ -49,12 +49,17 @@ public class StoneGame implements Initializable {
     public void clickEditButton(ActionEvent actionEvent){
         User selectedObject = (User)table.getSelectionModel().getSelectedItem();
         if(selectedObject != null){
+            //今入力されている値を取得
+            String company = editCompany.getValue();
+            String name = editName.getText();
+            int score = Integer.parseInt(editScore.getText());
 
-            String affiliation = selectedObject.getAffiliation();
-            String name = selectedObject.getName();
-            String score  = String.valueOf(selectedObject.getScore());
-            editName.setText(name);
-            editScore.setText(score);
+            selectedObject.setAffiliation(company);
+            selectedObject.setName(name);
+            selectedObject.setScore(score);
+
+            table.refresh();
+
 
         }
     }
@@ -96,12 +101,6 @@ public class StoneGame implements Initializable {
             }
         });
 
-    }
-
-
-    public void addButton(ActionEvent actionEvent) {
-        data.addAll(new User("RNS","Uchima",30));
-        data.addAll(new User("RNS","Matsumoto",50));
     }
 
     public void clickAddButton(ActionEvent actionEvent) {
