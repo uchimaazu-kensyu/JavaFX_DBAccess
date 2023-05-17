@@ -1,5 +1,6 @@
 package com.example.javafxtest2;
 
+import DBClass.DBAccess;
 import javafx.collections.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.*;
@@ -61,13 +62,33 @@ public class StoneGame implements Initializable {
             }
 
 
+        }
+    }
 
+    public void clickDeleteButton(ActionEvent actionEvent){
+        User selectedObject = (User)table.getSelectionModel().getSelectedItem();
+        if(selectedObject != null){
 
-
-
+            table.getItems().remove(selectedObject);
 
         }
     }
+
+    public void clickAddButton(ActionEvent actionEvent) {
+
+
+        String company = addCompany.getValue();
+        String name = addName.getText();
+        String score = addScore.getText();
+        boolean ok = checkInput(company,name,score);
+        if(ok){
+            data.addAll(new User(company,name,Integer.parseInt(score)));
+        }
+
+
+    }
+
+
 
     public boolean checkInput (String company , String name, String score){
         if(company!=null && !name.equals("") && !score.equals("") ){
@@ -104,20 +125,14 @@ public class StoneGame implements Initializable {
 
     }
 
-    public void clickDeleteButton(ActionEvent actionEvent){
-        User selectedObject = (User)table.getSelectionModel().getSelectedItem();
-        if(selectedObject != null){
 
-            table.getItems().remove(selectedObject);
-
-        }
-    }
 
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle bundle) {
+
         data = FXCollections.observableArrayList();
         table.setItems(data);
 
@@ -126,8 +141,16 @@ public class StoneGame implements Initializable {
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         scoreCol.setCellValueFactory(new PropertyValueFactory<>("score"));
 
-        data.addAll(new User("RNS","Uchima",30));
-        data.addAll(new User("RNS","Matsumoto",50));
+        //returnされたuserListをdataにaddAllして表示。
+        var userList = DBAccess.findAll();
+        for (var e :userList){
+            data.addAll(e);
+        }
+
+
+
+//        data.addAll(new User("RNS","Uchima",30));
+//        data.addAll(new User("RNS","Matsumoto",50));
 
         table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -143,19 +166,7 @@ public class StoneGame implements Initializable {
 
     }
 
-    public void clickAddButton(ActionEvent actionEvent) {
 
-
-        String company = addCompany.getValue();
-        String name = addName.getText();
-        String score = addScore.getText();
-        boolean ok = checkInput(company,name,score);
-        if(ok){
-            data.addAll(new User(company,name,Integer.parseInt(score)));
-        }
-
-
-    }
 
 
 }
