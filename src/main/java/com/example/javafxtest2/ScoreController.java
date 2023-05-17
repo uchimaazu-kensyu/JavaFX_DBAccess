@@ -39,12 +39,8 @@ public class ScoreController implements Initializable {
 
     @FXML private TextField editName;
     @FXML private TextField editScore;
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-
-    UserService service = new UserService();
-
-
-
+    private Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    private UserService service = new UserService();
 
 
 
@@ -86,15 +82,13 @@ public class ScoreController implements Initializable {
         }
 
         printTable();
-
-
     }
 
     public void clickFindButton(ActionEvent actionEvent){
         String name = findName.getText();
         if(name != null){
             var result = service.findByName(name);
-            }
+        }
         table.getItems().clear();
 
         //returnされたuserListをdataにaddAllして表示。
@@ -103,7 +97,7 @@ public class ScoreController implements Initializable {
             data.addAll(e);
         }
 
-        }
+    }
 
     public void clickBackButton(ActionEvent actionEvent){
         printTable();
@@ -186,7 +180,7 @@ public class ScoreController implements Initializable {
     }
 
 
-    public void printTable(){
+    private void printTable(){
         table.getItems().clear();
 
         //returnされたuserListをdataにaddAllして表示。

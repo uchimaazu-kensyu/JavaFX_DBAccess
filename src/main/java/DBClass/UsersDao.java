@@ -33,7 +33,6 @@ public class UsersDao{
                 var score = rs.getInt("score");
 
                 User user = new User(id,company,name,score);
-                System.out.println(user.getId()+user.getName()+ user.getAffiliation()+ user.getScore());
                 userList.add(user);
 
             }

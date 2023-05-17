@@ -10,9 +10,8 @@ public class UserService {
     Connection connection;
 
 
-        public static void main(String[] args) {
 
-        }
+
 
         public List<User> findAll(){
 
@@ -22,6 +21,13 @@ public class UserService {
             this.dao = new UsersDao(connection);
             //daoのfindAllを呼び出す
             var userList =dao.findAll();
+
+            //接続クローズ。
+            try {
+                connection.close();
+            }catch (RuntimeException | SQLException e){
+                e.printStackTrace();
+            }
 
             //userListをリターン。
             return userList;
@@ -36,6 +42,13 @@ public class UserService {
         //daoのfindAllを呼び出す
         int result = dao.insert(company,name,score);
 
+        //接続クローズ。
+        try {
+            connection.close();
+        }catch (RuntimeException | SQLException e){
+            e.printStackTrace();
+        }
+
         //userListをリターン。
         return result;
     }
@@ -49,6 +62,13 @@ public class UserService {
         //daoのfindAllを呼び出す
         int result = dao.delete(id);
 
+        //接続クローズ。
+        try {
+            connection.close();
+        }catch (RuntimeException | SQLException e){
+            e.printStackTrace();
+        }
+
         //userListをリターン。
         return result;
     }
@@ -60,6 +80,13 @@ public class UserService {
         this.dao = new UsersDao(connection);
         //daoのfindAllを呼び出す
         int result = dao.update(id,company,name,score);
+
+        //接続クローズ。
+        try {
+            connection.close();
+        }catch (RuntimeException | SQLException e){
+            e.printStackTrace();
+        }
 
         //userListをリターン。
         return result;
@@ -73,6 +100,13 @@ public class UserService {
         this.dao = new UsersDao(connection);
         //daoのfindAllを呼び出す
         List<User> result = dao.findByName(name);
+
+        //接続クローズ。
+        try {
+            connection.close();
+        }catch (RuntimeException | SQLException e){
+            e.printStackTrace();
+        }
 
         //userListをリターン。
         return result;
