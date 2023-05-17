@@ -65,6 +65,19 @@ public class UserService {
         return result;
     }
 
+    public List<User> findByName(String name){
+
+        // JDBCドライバの読み込みと接続。(DbUtilにまかす。)
+        var connection = DbUtil.getConnection();
+        //daoのインスタンス作成
+        this.dao = new UsersDao(connection);
+        //daoのfindAllを呼び出す
+        List<User> result = dao.findByName(name);
+
+        //userListをリターン。
+        return result;
+    }
+
 
 
     }

@@ -23,13 +23,17 @@ public class ScoreController implements Initializable {
     @FXML private TableColumn affiliationCol;
     @FXML private TableColumn nameCol;
     @FXML private TableColumn scoreCol;
+
     private ObservableList<User> data;
+    private ObservableList<User> find;
+
     @FXML
     private ComboBox<String> addCompany;
     @FXML
     private ComboBox<String> editCompany;
 
 
+    @FXML private TextField findName;
     @FXML private TextField addName;
     @FXML private TextField addScore;
 
@@ -85,6 +89,27 @@ public class ScoreController implements Initializable {
 
 
     }
+
+    public void clickFindButton(ActionEvent actionEvent){
+        String name = findName.getText();
+        if(name != null){
+            var result = service.findByName(name);
+            }
+        table.getItems().clear();
+
+        //returnされたuserListをdataにaddAllして表示。
+        var userList = service.findByName(name);
+        for (var e :userList){
+            data.addAll(e);
+        }
+
+        }
+
+    public void clickBackButton(ActionEvent actionEvent){
+        printTable();
+    }
+
+
 
 
 
@@ -171,6 +196,7 @@ public class ScoreController implements Initializable {
             data.addAll(e);
         }
     }
+
 
 
 

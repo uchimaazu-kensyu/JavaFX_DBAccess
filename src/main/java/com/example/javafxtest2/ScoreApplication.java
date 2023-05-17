@@ -11,7 +11,7 @@ public class ScoreApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ScoreApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+        Scene scene = new Scene(fxmlLoader.load(), 800, 700);
         stage.setTitle("点数管理");
         stage.setScene(scene);
         stage.show();

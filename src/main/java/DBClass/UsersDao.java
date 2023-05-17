@@ -99,4 +99,33 @@ public class UsersDao{
         return rs;
     }
 
+
+    public List<User> findByName(String inputName){
+        List<User> result  =new ArrayList<User>();
+        try (PreparedStatement stmt = connection.prepareStatement("SELECT * FROM users WHERE name LIKE '%"+inputName+"%' ORDER BY id;")) {
+
+
+            // SQL実行
+            ResultSet rs = stmt.executeQuery();
+
+            // 結果の取得
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                var company = rs.getString("company");
+                var name = rs.getString("name");
+                var score = rs.getInt("score");
+
+                User user = new User(id,company,name,score);
+                System.out.println(user.getId()+user.getName()+ user.getAffiliation()+ user.getScore());
+                result.add(user);
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
 }
