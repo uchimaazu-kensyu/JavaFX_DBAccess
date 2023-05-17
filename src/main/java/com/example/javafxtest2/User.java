@@ -8,7 +8,7 @@ public class User{
     private int score;
 
     public User(int id, String affiliation, String name, int score) {
-
+        this.id =id;
         this.affiliation= affiliation;
         this.name =name;
         this.score = score;

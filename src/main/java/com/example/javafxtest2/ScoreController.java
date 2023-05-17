@@ -37,6 +37,8 @@ public class ScoreController implements Initializable {
     @FXML private TextField editScore;
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
+    UserService service = new UserService();
+
 
 
 
@@ -47,35 +49,30 @@ public class ScoreController implements Initializable {
         User selectedObject = (User)table.getSelectionModel().getSelectedItem();
         if(selectedObject != null){
             //今入力されている値を取得
+            int id =selectedObject.getId();
             String company = editCompany.getValue();
             String name = editName.getText();
             String score = editScore.getText();
 
             boolean ok = checkInput(company,name,score);
             if(ok){
-                int setScore = Integer.parseInt(editScore.getText());
-                selectedObject.setAffiliation(company);
-                selectedObject.setName(name);
-                selectedObject.setScore(setScore);
-
-                table.refresh();
+                service.update(id,company,name,Integer.parseInt(score));
+                printTable();
             }
-
-
         }
     }
 
     public void clickDeleteButton(ActionEvent actionEvent){
         User selectedObject = (User)table.getSelectionModel().getSelectedItem();
         if(selectedObject != null){
-
-            table.getItems().remove(selectedObject);
-
+            int id =selectedObject.getId();
+            service.delete(id);
+            printTable();
         }
     }
 
     public void clickAddButton(ActionEvent actionEvent) {
-        var service = new UserService();
+
         String company = addCompany.getValue();
         String name = addName.getText();
         String score = addScore.getText();
@@ -94,7 +91,7 @@ public class ScoreController implements Initializable {
     public boolean checkInput (String company , String name, String score){
         if(company!=null && !name.equals("") && !score.equals("") ){
             try{
-                int setScore = Integer.parseInt(addScore.getText());
+                int inputScore = Integer.parseInt(score);
 
             }catch (NumberFormatException e){
                 alert.setTitle("Information Dialog");
@@ -104,7 +101,7 @@ public class ScoreController implements Initializable {
                 return false;
             }
 
-            int setScore = Integer.parseInt(addScore.getText());
+            int setScore = Integer.parseInt(score);
             if (0 <= setScore  && setScore <100){
                 return true;
             }else {
@@ -162,6 +159,8 @@ public class ScoreController implements Initializable {
         });
 
     }
+
+
     public void printTable(){
         table.getItems().clear();
 
