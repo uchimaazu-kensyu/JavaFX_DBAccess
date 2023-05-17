@@ -11,7 +11,7 @@ import java.util.List;
 
 public class UsersDao{
     final private Connection connection;
-    static List<User> userList = new ArrayList<User>();
+    private List<User> userList = new ArrayList<User>();
 
 
     public UsersDao(Connection connection){
@@ -19,6 +19,7 @@ public class UsersDao{
     }
 
     public List<User> findAll(){
+        userList.clear();
         try (PreparedStatement stmt = connection.prepareStatement("SELECT * FROM users");) {
 
             // SQL実行
@@ -31,7 +32,7 @@ public class UsersDao{
                 var name = rs.getString("name");
                 var score = rs.getInt("score");
 
-                User user = new User(company,name,score);
+                User user = new User(id,company,name,score);
                 userList.add(user);
 
             }
@@ -40,6 +41,24 @@ public class UsersDao{
             e.printStackTrace();
         }
         return userList;
+    }
+
+
+    public int insert(String company, String name, int score){
+        int rs =0;
+        try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO users (company,name,score) VALUES (?,?,?)");) {
+
+            stmt.setString(1,company);
+            stmt.setString(2,name);
+            stmt.setInt(3,score);
+            // SQL実行と件数をリターン。
+            rs = stmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 
 

@@ -2,19 +2,17 @@ package com.example.javafxtest2;
 
 public class User{
     //id用
-    private static int idCounter = 1;
-
-    private int id;
+    private  int id;
     private String affiliation;
     private String name;
     private int score;
 
-    public User( String affiliation, String name, int score) {
-        this.id = idCounter;
+    public User(int id, String affiliation, String name, int score) {
+
         this.affiliation= affiliation;
         this.name =name;
         this.score = score;
-        idCounter++;
+
     }
 
 

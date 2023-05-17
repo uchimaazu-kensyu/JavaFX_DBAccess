@@ -27,7 +27,18 @@ public class UserService {
             return userList;
         }
 
-        
+    public int insert(String company,String name,int score){
+
+        // JDBCドライバの読み込みと接続。(DbUtilにまかす。)
+        var connection = DbUtil.getConnection();
+        //daoのインスタンス作成
+        this.dao = new UsersDao(connection);
+        //daoのfindAllを呼び出す
+        int result = dao.insert(company,name,score);
+
+        //userListをリターン。
+        return result;
+    }
 
 
 

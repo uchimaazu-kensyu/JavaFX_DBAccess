@@ -75,15 +75,16 @@ public class ScoreController implements Initializable {
     }
 
     public void clickAddButton(ActionEvent actionEvent) {
-
-
+        var service = new UserService();
         String company = addCompany.getValue();
         String name = addName.getText();
         String score = addScore.getText();
         boolean ok = checkInput(company,name,score);
         if(ok){
-            data.addAll(new User(company,name,Integer.parseInt(score)));
+            service.insert(company,name,Integer.parseInt(score));
         }
+
+        printTable();
 
 
     }
@@ -134,6 +135,7 @@ public class ScoreController implements Initializable {
     public void initialize(URL url, ResourceBundle bundle) {
 
         data = FXCollections.observableArrayList();
+        printTable();
         table.setItems(data);
 
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -141,12 +143,6 @@ public class ScoreController implements Initializable {
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         scoreCol.setCellValueFactory(new PropertyValueFactory<>("score"));
 
-        //returnされたuserListをdataにaddAllして表示。
-        var service = new UserService();
-        var userList = service.findAll();
-        for (var e :userList){
-            data.addAll(e);
-        }
 
 
 
@@ -165,6 +161,16 @@ public class ScoreController implements Initializable {
             }
         });
 
+    }
+    public void printTable(){
+        table.getItems().clear();
+
+        //returnされたuserListをdataにaddAllして表示。
+        var service = new UserService();
+        var userList = service.findAll();
+        for (var e :userList){
+            data.addAll(e);
+        }
     }
 
 
