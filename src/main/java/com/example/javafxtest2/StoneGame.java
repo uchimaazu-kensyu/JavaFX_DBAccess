@@ -142,7 +142,8 @@ public class StoneGame implements Initializable {
         scoreCol.setCellValueFactory(new PropertyValueFactory<>("score"));
 
         //returnされたuserListをdataにaddAllして表示。
-        var userList = DBAccess.findAll();
+        var service = new DBAccess();
+        var userList = service.findAll();
         for (var e :userList){
             data.addAll(e);
         }
