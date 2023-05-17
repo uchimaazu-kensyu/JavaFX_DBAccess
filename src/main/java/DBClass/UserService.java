@@ -3,10 +3,9 @@ package DBClass;
 import com.example.javafxtest2.User;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
-public class DBAccess {
+public class UserService {
     UsersDao dao;
     Connection connection;
 
@@ -27,6 +26,9 @@ public class DBAccess {
             //userListをリターン。
             return userList;
         }
+
+        
+
 
 
     }

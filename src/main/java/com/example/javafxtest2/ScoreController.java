@@ -1,6 +1,6 @@
 package com.example.javafxtest2;
 
-import DBClass.DBAccess;
+import DBClass.UserService;
 import javafx.collections.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.*;
@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 
 import static javafx.application.Application.launch;
 
-public class StoneGame implements Initializable {
+public class ScoreController implements Initializable {
 
 
 
@@ -142,7 +142,7 @@ public class StoneGame implements Initializable {
         scoreCol.setCellValueFactory(new PropertyValueFactory<>("score"));
 
         //returnされたuserListをdataにaddAllして表示。
-        var service = new DBAccess();
+        var service = new UserService();
         var userList = service.findAll();
         for (var e :userList){
             data.addAll(e);
